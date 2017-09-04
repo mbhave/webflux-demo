@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +21,13 @@ public class CitiesController {
 	}
 
 	@GetMapping("/cities/{id}")
-	public City findById(@PathVariable String id) {
-		return this.repository.findById(id).orElse(null);
+	public Mono<City> findById(@PathVariable String id) {
+		return this.repository.findById(id);
 	}
 
 	@GetMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Iterable<City> all() {
-		return this.repository.findAll();
+	public Flux<City> all() {
+		return this.repository.findAll()
+				.log();
 	}
 }

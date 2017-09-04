@@ -1,10 +1,10 @@
 package com.example.demo;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 /**
  * @author Madhura Bhave
  */
-public interface CityRepository extends CrudRepository<City, String> {
+public interface CityRepository extends ReactiveCrudRepository<City, String> {
 
 }
