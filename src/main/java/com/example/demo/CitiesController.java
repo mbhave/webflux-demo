@@ -26,8 +26,9 @@ public class CitiesController {
 	}
 
 	@GetMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Flux<City> all() {
+	public Flux<Object> all() {
 		return this.repository.findAll()
-				.log();
+				.filter(c -> c.getCountry().equals("USA"))
+				.map(City::getName);
 	}
 }
